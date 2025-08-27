@@ -2,14 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 簡潔標題字體 */
-.simple-title {
+/* 確保 body 和 html 不會覆蓋背景 */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#app {
+  background: transparent !important;
+  min-height: 100vh !important;
+}
+
+/* 強制顯示背景 - 深米色單色 */
+.background-container {
+  background: #B8A082 !important;
+  background-image: radial-gradient(circle at 1px 1px, rgba(139, 125, 102, 0.2) 1px, transparent 0) !important;
+  background-size: 20px 20px !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* 主標題樣式 - 統一加粗 */
+.main-title {
   font-family: 'Indie Flower', cursive;
-  font-weight: 400;
+  font-weight: 900;
   letter-spacing: 0.1em;
-  color: #8B7D66;
-  text-shadow: none;
+  color: #5D4E37;
+  text-shadow: 2px 2px 4px rgba(139, 125, 102, 0.4);
   position: relative;
+  margin-bottom: 1rem;
 }
 
 /* 統一手寫字體 */
@@ -19,16 +43,54 @@
   color: #666;
 }
 
-/* 簡潔白色卡片 */
+/* 淡色手寫字體 */
+.indie-text-light {
+  font-family: 'Indie Flower', cursive !important;
+  font-weight: 400;
+  color: #999;
+  font-style: italic;
+}
+
+/* 簡潔白色卡片 - 加強紙券質感與四角打孔 */
 .simple-card {
   background: #ffffff;
   border: none;
   border-radius: 24px;
   box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.1),
-    0 2px 6px rgba(0, 0, 0, 0.05);
+    0 12px 32px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: auto;
+  height: auto;
+}
+
+.simple-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 四角打孔裝飾 */
+.simple-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: #B8A082;
+  border-radius: 50%;
+  box-shadow: 
+    calc(100% + 16px) 0 0 #B8A082,
+    0 calc(100% + 16px) 0 #B8A082,
+    calc(100% + 16px) calc(100% + 16px) 0 #B8A082;
+  z-index: -1;
 }
 
 /* 簡潔票券邊框 - 圓弧缺口 */
@@ -81,27 +143,47 @@
   z-index: 1;
 }
 
-/* 使用須知前的撕線 */
+/* 使用須知前的撕線 - 加強版 */
 .tear-line-before {
   position: relative;
   margin-top: 1.5rem;
+  padding-top: 1.2rem;
 }
 
 .tear-line-before::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -0.75rem;
-  height: 2px;
+  left: -10px;
+  right: -10px;
+  top: -0.3rem;
+  height: 3px;
   background: repeating-linear-gradient(
     to right,
-    #D4C4A0 0px,
-    #D4C4A0 6px,
-    transparent 6px,
-    transparent 12px
+    #8B7D66 0px,
+    #8B7D66 8px,
+    transparent 8px,
+    transparent 16px
   );
   z-index: 1;
+  border-radius: 1px;
+}
+
+/* 撕線陰影效果 */
+.tear-line-before::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  top: calc(-0.3rem + 1px);
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(139, 125, 102, 0.3) 0px,
+    rgba(139, 125, 102, 0.3) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  z-index: 0;
 }
 
 /* 簡潔圓孔 */
@@ -117,7 +199,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  background: #C8B99C;
+  background: #B8A082;
   border-radius: 50%;
 }
 
@@ -129,35 +211,41 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  background: #C8B99C;
+  background: #B8A082;
   border-radius: 50%;
 }
 
-/* 簡潔印章 */
+/* 簡潔印章 - 深橘色，更自然角度 */
 .simple-stamp {
   position: absolute;
   top: 20px;
   right: 20px;
   padding: 8px 16px;
-  background: transparent;
-  border: 2px solid #8B7D66;
+  background: rgba(230, 126, 34, 0.1);
+  border: 2px solid #e67e22;
   border-radius: 8px;
-  transform: rotate(-15deg);
+  transform: rotate(-22deg);
   font-family: 'Indie Flower', cursive;
   font-size: clamp(0.8rem, 2vw, 1rem);
-  color: #8B7D66;
-  font-weight: normal;
+  color: #e67e22;
+  font-weight: bold;
   letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px rgba(230, 126, 34, 0.3);
 }
 
-/* 簡潔米色背景 */
+/* 簡潔米色背景 - 加入細緻紋理 */
 .simple-background {
   background: linear-gradient(
     135deg,
     #C8B99C 0%,
     #D4C4A0 50%,
     #E0D5B7 100%
-  );
+  ) !important;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(139, 125, 102, 0.15) 1px, transparent 0) !important;
+  background-size: 20px 20px !important;
+  min-height: 100vh !important;
+  background-attachment: fixed !important;
 }
 
 /* 簡潔區塊樣式 */
@@ -180,7 +268,7 @@
 
 /* 響應式字體大小 */
 .title-responsive {
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
   line-height: 1.1;
   white-space: nowrap;
   overflow: hidden;
@@ -196,8 +284,8 @@
 }
 
 .content-responsive {
-  font-size: clamp(1rem, 2.8vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(1rem, 2.8vw, 1.2rem);
+  line-height: 1.6;
   color: #666;
 }
 
@@ -208,8 +296,8 @@
 }
 
 .note-responsive {
-  font-size: clamp(0.8rem, 2vw, 0.95rem);
-  line-height: 1.5;
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  line-height: 1.6;
   color: #666;
 }
 
@@ -252,5 +340,303 @@
   
   .mobile-spacing {
     padding: 1rem !important;
+  }
+}
+
+/* 新增的樣式元素 */
+
+/* 標題裝飾 */
+.title-decoration {
+  margin: 0.5rem 0;
+}
+
+.heart-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.heart-divider::before,
+.heart-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #D4C4A0,
+    transparent
+  );
+  margin: 0 1rem;
+}
+
+.heart-icon {
+  font-size: 1.2rem;
+  color: #FF5722;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* 主內容區域 */
+.main-content-section {
+  padding: 0.5rem 0;
+  margin: 0.3rem 0;
+}
+
+.content-spacer {
+  height: 0.3rem;
+}
+
+/* 兌換資訊卡片 */
+.exchange-info-container {
+  margin: 1rem 0;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(212, 196, 160, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.info-icon {
+  font-size: 2rem;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+}
+
+.info-label {
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.9rem;
+  color: #5D4E37;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+}
+
+.info-value {
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 使用須知 */
+.usage-notes-section {
+  margin: 1rem 0;
+  padding-top: 0.2rem;
+}
+
+.notes-title {
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 900;
+  color: #5D4E37;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.notes-container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+  padding: 0.3rem 0;
+}
+
+.note-icon {
+  font-size: 1.2rem;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.8rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.note-text {
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  flex: 1;
+}
+
+/* 簽名區域 */
+.signature-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* 簽名區域 - 緊湊版 */
+.signature-section-compact {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* 簽名區域 - 更緊湊 */
+.signature-section-tight {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.signature-box {
+  border: 2px dashed #D4C4A0;
+  border-radius: 8px;
+  padding: 0.8rem;
+  margin: 0.8rem auto;
+  max-width: 300px;
+  background: rgba(212, 196, 160, 0.05);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.sofa-corner {
+  font-size: 1.5rem;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.signature-content {
+  flex: 1;
+  text-align: left;
+}
+
+.signature-label {
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.9rem;
+  color: #5D4E37;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+}
+
+.signature-name {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.1rem;
+  color: #5D4E37;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* 序號 */
+.voucher-number {
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* 響應式調整 */
+@media (max-width: 480px) {
+  .info-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    max-width: 100%;
+  }
+  
+  .info-card {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .heart-divider::before,
+  .heart-divider::after {
+    margin: 0 0.5rem;
+  }
+  
+  .notes-container {
+    padding: 0 1rem;
+  }
+  
+  .signature-box {
+    margin: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .signature-content {
+    text-align: center;
+  }
+  
+  .sofa-corner {
+    align-self: center;
+  }
+}
+
+/* 極小螢幕也保持左右並排 */
+@media (max-width: 320px) {
+  .info-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    max-width: 100%;
+  }
+  
+  .info-card {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .info-icon {
+    font-size: 1.5rem;
+    height: 24px;
+    width: 24px;
+  }
+  
+  .info-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .info-value {
+    font-size: 0.75rem;
+    line-height: 1.3;
   }
 }
