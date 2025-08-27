@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 簡潔標題字體 */
+.simple-title {
+  font-family: 'Indie Flower', cursive;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #8B7D66;
+  text-shadow: none;
+  position: relative;
+}
+
+/* 統一手寫字體 */
+.indie-text {
+  font-family: 'Indie Flower', cursive !important;
+  font-weight: 400;
+  color: #666;
+}
+
+/* 簡潔白色卡片 */
+.simple-card {
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 簡潔票券邊框 - 圓弧缺口 */
+.ticket-border {
+  position: relative;
+  border-radius: 16px;
+  clip-path: polygon(
+    0% 0%, 
+    100% 0%, 
+    100% 46%, 
+    98% 46%, 
+    98% 47%, 
+    99% 48%, 
+    99% 52%, 
+    98% 53%, 
+    98% 54%, 
+    100% 54%, 
+    100% 100%, 
+    0% 100%, 
+    0% 54%, 
+    2% 54%, 
+    2% 53%, 
+    1% 52%, 
+    1% 48%, 
+    2% 47%, 
+    2% 46%, 
+    0% 46%
+  );
+}
+
+/* 簡潔撕線 */
+.simple-perforated {
+  position: relative;
+}
+
+.simple-perforated::before {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #D4C4A0 0px,
+    #D4C4A0 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  z-index: 1;
+}
+
+/* 使用須知前的撕線 */
+.tear-line-before {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.tear-line-before::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.75rem;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #D4C4A0 0px,
+    #D4C4A0 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  z-index: 1;
+}
+
+/* 簡潔圓孔 */
+.simple-holes {
+  position: relative;
+}
+
+.simple-holes::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #C8B99C;
+  border-radius: 50%;
+}
+
+.simple-holes::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #C8B99C;
+  border-radius: 50%;
+}
+
+/* 簡潔印章 */
+.simple-stamp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 2px solid #8B7D66;
+  border-radius: 8px;
+  transform: rotate(-15deg);
+  font-family: 'Indie Flower', cursive;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: #8B7D66;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+}
+
+/* 簡潔米色背景 */
+.simple-background {
+  background: linear-gradient(
+    135deg,
+    #C8B99C 0%,
+    #D4C4A0 50%,
+    #E0D5B7 100%
+  );
+}
+
+/* 簡潔區塊樣式 */
+.simple-section {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1rem 0;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.simple-divider {
+  width: 80%;
+  height: 1px;
+  background: #D4C4A0;
+  margin: 1rem auto;
+  border: none;
+}
+
+/* 響應式字體大小 */
+.title-responsive {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle-responsive {
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  color: #999;
+}
+
+.content-responsive {
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  line-height: 1.7;
+  color: #666;
+}
+
+.info-responsive {
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  line-height: 1.6;
+  color: #666;
+}
+
+.note-responsive {
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  line-height: 1.5;
+  color: #666;
+}
+
+/* RWD 優化 */
+@media (max-width: 430px) {
+  .safe-padding {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  .mobile-spacing {
+    padding: 1.5rem !important;
+  }
+  
+  .title-responsive {
+    font-size: clamp(1.6rem, 4.5vw, 2.8rem) !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .mobile-spacing {
+    padding: 1.2rem !important;
+  }
+  
+  .title-responsive {
+    font-size: clamp(1.4rem, 4vw, 2.2rem) !important;
+  }
+  
+  .content-responsive {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .title-responsive {
+    font-size: 1.3rem !important;
+    letter-spacing: 0.05em !important;
+  }
+  
+  .mobile-spacing {
+    padding: 1rem !important;
+  }
+}
