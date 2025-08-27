@@ -51,9 +51,9 @@ html, body {
   font-style: italic;
 }
 
-/* 簡潔白色卡片 - 加強紙券質感與四角打孔 */
+/* 簡潔米色卡片 - 加強紙券質感與四角打孔 */
 .simple-card {
-  background: #ffffff;
+  background: #F9F5F0;
   border: none;
   border-radius: 24px;
   box-shadow: 
@@ -76,21 +76,38 @@ html, body {
     0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 四角打孔裝飾 */
+/* 四角打孔裝飾 - 更明顯的版本 */
 .simple-card::before {
-  content: '';
+  content: '○ ○';
   position: absolute;
   top: -8px;
   left: -8px;
-  width: 16px;
-  height: 16px;
-  background: #B8A082;
-  border-radius: 50%;
-  box-shadow: 
-    calc(100% + 16px) 0 0 #B8A082,
-    0 calc(100% + 16px) 0 #B8A082,
-    calc(100% + 16px) calc(100% + 16px) 0 #B8A082;
-  z-index: -1;
+  right: -8px;
+  bottom: -8px;
+  color: #8B7D66;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.simple-card::after {
+  content: '○ ○';
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  right: -8px;
+  color: #8B7D66;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* 簡潔票券邊框 - 圓弧缺口 */
@@ -166,6 +183,7 @@ html, body {
   );
   z-index: 1;
   border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(139, 125, 102, 0.3);
 }
 
 /* 撕線陰影效果 */
