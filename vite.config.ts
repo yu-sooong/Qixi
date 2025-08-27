@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
 const isCI = process.env.GITHUB_ACTIONS === 'true'
 const baseUrl = isCI ? `/${repo}/` : '/'
-const siteUrl = isCI ? `https://ting.github.io/${repo}/` : 'http://localhost:5173/'
+const siteUrl = isCI ? `https://yu-sooong.github.io/${repo}/` : 'http://localhost:5173/'
 
 export default defineConfig({
   plugins: [
