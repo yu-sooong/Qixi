@@ -1,8 +1,11 @@
+// vite.config.ts
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
+const isCI = process.env.GITHUB_ACTIONS === 'true'
+
 export default defineConfig({
   plugins: [vue()],
-  base: '/Qixi/',
+  base: isCI ? `/${repo}/` : '/',
 })

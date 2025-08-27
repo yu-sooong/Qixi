@@ -20,8 +20,19 @@ jobs:
           node-version: "18"
           cache: "npm"
 
-      - name: Install dependencies
-        run: npm install
+      - name: Use clean install
+        run: npm ci
+
+      - name: Print versions (debug)
+        run: |
+          node -v
+          npm -v
+          npx tsc -v || true
+          npx vue-tsc --version
+          node -p "require('typescript').version"
+
+      - name: Type Check
+        run: npm run typecheck
 
       - name: Build
         run: npm run build
@@ -32,4 +43,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: # 如果有自訂域名，請在這裡設定
+          # cname: your.domain.com  # 有自訂網域再填
